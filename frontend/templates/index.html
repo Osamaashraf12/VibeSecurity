@@ -1,0 +1,2637 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+
+
+
+<head>
+
+
+ <meta charset="UTF-8">
+
+
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+ <title>VibeSecurity AI - Security Operations Dashboard</title>
+
+
+ <link rel="stylesheet" href="../static/css/main.css">
+
+
+ <link rel="stylesheet" href="../static/css/modules.css">
+
+
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+ <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+
+</head>
+
+
+
+
+
+<body>
+
+
+ <header class="header">
+
+
+ <div class="container">
+
+
+ <nav class="nav">
+
+
+ <div class="nav__brand">
+
+
+ <div class="logo">
+
+
+ <span class="logo__icon"><img src="../static/img/logo.png" alt="Our logo"></span>
+
+
+ <span class="logo__text">VibeSecurity AI</span>
+
+
+ </div>
+
+
+ </div>
+
+
+ <ul class="nav__menu">
+
+
+ <li><a href="#" class="nav-btn active" data-target="dashboard">Dashboard</a></li>
+
+
+
+
+
+ <!-- Reconnaissance Dropdown -->
+
+
+ <li class="nav-item-dropdown">
+
+
+ <a href="#" class="nav-btn dropdown-trigger">Reconnaissance</a>
+
+
+ <div class="dropdown-content">
+
+
+ <a href="#" class="nav-btn" data-target="recon-asset">Asset discovery</a>
+
+
+ <a href="#" class="nav-btn" data-target="recon-content">Content discovery</a>
+
+
+ </div>
+
+
+ </li>
+
+
+
+
+
+ <!-- Vulnerabilities Dropdown -->
+
+
+ <li class="nav-item-dropdown">
+
+
+ <a href="#" class="nav-btn dropdown-trigger">Vulnerabilities</a>
+
+
+ <div class="dropdown-content">
+
+
+ <a href="#" class="nav-btn" data-target="vulnerability">Vulnerabilities Scanning</a>
+
+
+ <a href="#" class="nav-btn" data-target="http-request-scan">HTTP Request Scanning</a>
+
+
+ </div>
+
+
+ </li>
+
+
+
+
+
+ <li><a href="#" class="nav-btn" data-target="ai-assistant">AI chat</a></li>
+
+
+ <li><a href="#" class="nav-btn" data-target="build-flow">Build workflow</a></li>
+
+
+ <li><a href="#" class="nav-btn" data-target="reporting">Reporting</a></li>
+
+
+ </ul>
+
+
+ </nav>
+
+
+ </div>
+
+
+ </header>
+
+
+
+
+
+ <main class="main-content">
+
+
+ <div class="container">
+
+
+
+
+
+ <!-- VIEW: DASHBOARD -->
+
+
+ <div id="view-dashboard" class="view active">
+
+
+ <section id="home" class="hero">
+
+
+ <div class="hero__container container">
+
+
+ <div class="hero__content">
+
+
+ <h1 class="hero__title">VibeSecurity AI: Next-Generation Vulnerability Scanner</h1>
+
+
+ <p class="hero__subtitle">AI-powered vulnerability scanner with advanced reconnaissance,
+
+
+ intelligent analysis, and comprehensive reporting.</p>
+
+
+ <div class="hero__buttons">
+
+
+ <button class="btn btn--primary btn--lg" id="startScanningBtn">Start Scanning</button>
+
+
+ <button class="btn btn--outline btn--lg" id="learnMoreBtn">Learn More</button>
+
+
+ </div>
+
+
+ </div>
+
+
+ <div class="hero__visual">
+
+
+ <div class="security-grid">
+
+
+ <div class="grid-item"></div>
+
+
+ <div class="grid-item"></div>
+
+
+ <div class="grid-item"></div>
+
+
+ <div class="grid-item"></div>
+
+
+ <div class="grid-item active"></div>
+
+
+ <div class="grid-item"></div>
+
+
+ <div class="grid-item"></div>
+
+
+ <div class="grid-item active"></div>
+
+
+ <div class="grid-item"></div>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ </section>
+
+
+
+
+
+ <div class="dashboard-header" id="scrolling-to-scan">
+
+
+ <h2>Security Operations Dashboard</h2>
+
+
+ <p class="dashboard-subtitle">Monitor and manage your security scanning operations</p>
+
+
+ </div>
+
+
+
+
+
+ <!-- Full Scan Section -->
+
+
+ <div class="scan-config" id="scanConfig">
+
+
+ <h3>Smart Scan Assistant</h3>
+
+
+ <p>Enter a target or describe your scanning needs in plain English. The AI will build the workflow.
+
+
+ </p>
+
+
+ <div class="config-form">
+
+
+ <div class="form-group">
+
+
+ <label for="full-scan-target" class="form-label">Target or Prompt</label>
+
+
+ <input type="text" id="full-scan-target" class="form-control"
+
+
+ placeholder="e.g., google.com OR scan google.com for all vulnerabilities">
+
+
+ </div>
+
+
+ <div class="form-actions"
+
+
+ style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+
+
+ <button class="btn btn--primary" id="start-full-scan">Parse and Scan</button>
+
+
+ <span style="color: var(--color-text-muted);">OR</span>
+
+
+ <div style="display: flex; gap: 10px; flex: 1; align-items: center;">
+
+
+ <select id="dashboard-recipe-select" class="form-control"
+
+
+ style="flex: 1; min-width: 200px;">
+
+
+ <option value="">-- Select Saved Recipe --</option>
+
+
+ </select>
+
+
+ <button class="btn btn--outline" id="run-recipe-btn">Run Recipe</button>
+
+
+ <button class="btn btn--secondary" id="manage-recipes-btn">Manage</button>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ <div class="scan-results hidden" style="margin-top: 2rem;">
+
+
+ <h3>Active Scan Status</h3>
+
+
+ <div class="results-grid">
+
+
+ </div>
+
+
+ </div>
+
+
+ <!-- Module Cards -->
+
+
+ <div class="modules-grid">
+
+
+ <div class="module-card" data-module="reconnaissance">
+
+
+ <div class="module-header">
+
+
+ <h3>Reconnaissance</h3>
+
+
+ </div>
+
+
+ <p class="module-description">Comprehensive OSINT and intelligence gathering</p>
+
+
+ <div class="module-submodules">
+
+
+ <span class="submodule-tag">Username Enumeration</span>
+
+
+ <span class="submodule-tag">Email Discovery</span>
+
+
+ <span class="submodule-tag">Subdomain Enumeration</span>
+
+
+ </div>
+
+
+ <div class="module-actions">
+
+
+ <button class="btn btn--primary" id="nav-recon">Open Module</button>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <div class="module-card" data-module="vulnerability">
+
+
+ <div class="module-header">
+
+
+ <h3>Vulnerabilities Scanning</h3>
+
+
+ </div>
+
+
+ <p class="module-description">Detection of web application vulnerabilities</p>
+
+
+ <div class="module-submodules">
+
+
+ <span class="submodule-tag">SQL Injection</span>
+
+
+ <span class="submodule-tag">XSS Detection</span>
+
+
+ <span class="submodule-tag">File Upload</span>
+
+
+ </div>
+
+
+ <div class="module-actions">
+
+
+ <button class="btn btn--primary" id="nav-vuln">Open Module</button>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <div class="module-card" data-module="ai-assistant">
+
+
+ <div class="module-header">
+
+
+ <h3>AI chat</h3>
+
+
+ </div>
+
+
+ <p class="module-description">Intelligent guidance and educational explanations</p>
+
+
+ <div class="module-features">
+
+
+ <span class="feature-tag">Contextual Guidance</span>
+
+
+ <span class="feature-tag">Payload Suggestions</span>
+
+
+ <span class="feature-tag">Educational Content</span>
+
+
+ </div>
+
+
+ <div class="module-actions">
+
+
+ <button class="btn btn--primary" id="nav-AI">Open Chat</button>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- "Build workflow" Card -->
+
+
+ <div class="module-card" data-module="build-flow"
+
+
+ onclick="document.querySelector('[data-target=\'build-flow\']').click()">
+
+
+ <div class="module-header">
+
+
+ <h3>Build workflow</h3>
+
+
+ </div>
+
+
+ <p class="module-description">Visually construct custom vulnerability scan workflows</p>
+
+
+ <div class="module-features">
+
+
+ <span class="feature-tag">Drag & Drop</span>
+
+
+ <span class="feature-tag">Templates</span>
+
+
+ <span class="feature-tag">Custom Flows</span>
+
+
+ </div>
+
+
+ <div class="module-actions">
+
+
+ <button class="btn btn--primary">Build Flow</button>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <div class="module-card" data-module="reporting"
+
+
+ onclick="document.querySelector('[data-target=\'reporting\']').click()">
+
+
+ <div class="module-header">
+
+
+ <h3>Reporting</h3>
+
+
+ </div>
+
+
+ <p class="module-description">Clear, actionable reports with risk scoring</p>
+
+
+ <div class="module-features">
+
+
+ <span class="feature-tag">Interactive Reports</span>
+
+
+ <span class="feature-tag">Risk Scoring</span>
+
+
+ </div>
+
+
+ <div class="module-actions">
+
+
+ <button class="btn btn--primary">View Reports</button>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- VIEW: BUILD FLOW -->
+
+
+ <div id="view-build-flow" class="view" style="position: fixed; top: 65px; left: 0; width: 100vw; height: calc(100vh - 65px); z-index: 100; background: var(--color-background); padding: 0;">
+
+
+ <div class="flow-wrapper" style="height: 100%; border-radius: 0; border: none; border-top: 1px solid var(--color-border);">
+
+
+ <!-- Left Sidebar -->
+
+
+ <aside class="flow-sidebar">
+
+
+ <div class="flow-sidebar-header">
+
+
+ <h3>Workflow Resources</h3>
+
+
+ </div>
+
+
+
+
+
+ <!-- Templates Section -->
+
+
+ <div class="flow-section">
+
+
+ <h4>Templates</h4>
+
+
+ <div class="template-list">
+
+
+ <div class="template-item" data-template="quick">Quick Scan</div>
+
+
+ <div class="template-item" data-template="deep">Full Deep Scan</div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- Tools Section -->
+
+
+ <div class="flow-section">
+
+
+ <h4>Available Tools</h4>
+
+
+ <!-- Content will be populated by JS -->
+
+
+ <div class="tools-list" id="flow-tools-container"></div>
+
+
+ </div>
+
+
+
+
+
+ <!-- Wordlists Section -->
+
+
+ <div class="flow-section">
+
+
+ <h4>Wordlists & Payloads</h4>
+
+
+ <!-- Content will be populated by JS -->
+
+
+ <div class="tools-list" id="flow-files-container"></div>
+
+
+ </div>
+
+
+ </aside>
+
+
+
+
+
+ <!-- Main Canvas -->
+
+
+ <main class="flow-canvas-area">
+
+
+ <div class="flow-canvas-header">
+
+
+ <button class="btn btn--secondary" id="flow-clear-btn">Clear</button>
+
+
+ <button class="btn btn--outline" id="flow-save-recipe-btn">Save as Recipe</button>
+
+
+ <button class="btn btn--primary" id="flow-start-btn">Start Scan</button>
+
+
+ </div>
+
+
+ <div class="flow-dropzone" id="flow-canvas">
+
+
+ <!-- Nodes will be dropped here -->
+
+
+ </div>
+
+
+ </main>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- VIEW: RECON - ASSET DISCOVERY -->
+
+
+ <div id="view-recon-asset" class="view">
+
+
+ <section class="hero2">
+
+
+ <div class="page-header">
+
+
+ <h2>Recon: Asset Discovery</h2>
+
+
+ <p>Comprehensive OSINT and intelligence gathering</p>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-split-layout">
+
+
+ <div class="scan-content-left">
+
+
+ <div class="scan-config-content">
+
+
+ <!-- Configuration content will be populated by JavaScript -->
+
+
+ </div>
+
+
+ </div>
+
+
+ <div class="scan-assistant-right">
+
+
+ <div class="scan-assistant-header">
+
+
+ <div class="scan-assistant-title">
+
+
+ <h3>AI Assistant</h3>
+
+
+ </div>
+
+
+ <button class="scan-assistant-close" onclick="closeScanAssistant()">x</button>
+
+
+ </div>
+
+
+ <div class="scan-assistant-messages">
+
+
+ <div class="scan-assistant-message bot">
+
+
+ <div class="scan-assistant-message-avatar">AI</div>
+
+
+ <div class="scan-assistant-message-content">
+
+
+ <p>Hi! I am here to help you with asset discovery. Ask me about domain
+
+
+ enumeration, subnet mapping, or other asset discovery techniques.</p>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ <div class="scan-assistant-quick-actions">
+
+
+ <button class="scan-assistant-quick-btn"
+
+
+ onclick="askScanAssistant('What assets should I prioritize?')">Scan Focus</button>
+
+
+ <button class="scan-assistant-quick-btn"
+
+
+ onclick="askScanAssistant('How do I map subdomains?')">Subdomains</button>
+
+
+ </div>
+
+
+ <div class="scan-assistant-input">
+
+
+ <input type="text" placeholder="Ask me anything about asset discovery...">
+
+
+ <button class="scan-assistant-send" onclick="sendScanAssistantMessage()">Send</button>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-config">
+
+
+ <h3>Asset Discovery Configuration</h3>
+
+
+ <form class="config-form">
+
+
+ <div class="form-group">
+
+
+ <label for="recon-target-asset" class="form-label">Target or Prompt</label>
+
+
+ <input type="text" id="recon-target-asset" class="form-control"
+
+
+ placeholder="e.g., google.com OR scan google.com for subdomains">
+
+
+ </div>
+
+
+
+
+
+ <div class="form-group">
+
+
+ <label class="form-label">Asset Discovery Modules</label>
+
+
+ <!-- Content will be populated by JS -->
+
+
+ <div class="submodule-grid" id="asset-tools-container"></div>
+
+
+ </div>
+
+
+
+
+
+ <div class="form-actions">
+
+
+ <button type="button" class="btn btn--primary start-scan">Start Asset Discovery</button>
+
+
+ <button type="button" class="btn btn--outline save-recipe-manual">Save as
+
+
+ Recipe</button>
+
+
+ <button type="button" class="btn btn--secondary clear-selection">Clear
+
+
+ selection</button>
+
+
+ </div>
+
+
+ </form>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-results hidden">
+
+
+ <h3>Discovery Results</h3>
+
+
+ <div class="results-grid">
+
+
+ <!-- Results will be generated here -->
+
+
+ </div>
+
+
+ </div>
+
+
+ </section>
+
+
+ </div>
+
+
+
+
+
+ <!-- VIEW: RECON - CONTENT DISCOVERY -->
+
+
+ <div id="view-recon-content" class="view">
+
+
+ <section class="hero2">
+
+
+ <div class="page-header">
+
+
+ <h2>Recon: Content Discovery</h2>
+
+
+ <p>Comprehensive OSINT and intelligence gathering</p>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-split-layout">
+
+
+ <div class="scan-content-left">
+
+
+ <div class="scan-config-content">
+
+
+ <!-- Configuration content will be populated by JavaScript -->
+
+
+ </div>
+
+
+ </div>
+
+
+ <div class="scan-assistant-right">
+
+
+ <div class="scan-assistant-header">
+
+
+ <div class="scan-assistant-title">
+
+
+ <h3>AI Assistant</h3>
+
+
+ </div>
+
+
+ <button class="scan-assistant-close" onclick="closeScanAssistant()">x</button>
+
+
+ </div>
+
+
+ <div class="scan-assistant-messages">
+
+
+ <div class="scan-assistant-message bot">
+
+
+ <div class="scan-assistant-message-avatar">AI</div>
+
+
+ <div class="scan-assistant-message-content">
+
+
+ <p>Hi! I am here to help you with content discovery. Ask me about directory
+
+
+ fuzzing, parameter discovery, or spidering.</p>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ <div class="scan-assistant-quick-actions">
+
+
+ <button class="scan-assistant-quick-btn"
+
+
+ onclick="askScanAssistant('What is content discovery?')">Overview</button>
+
+
+ <button class="scan-assistant-quick-btn"
+
+
+ onclick="askScanAssistant('Explain directory bruteforcing')">Dir Bruteforce</button>
+
+
+ </div>
+
+
+ <div class="scan-assistant-input">
+
+
+ <input type="text" placeholder="Ask me anything about content discovery...">
+
+
+ <button class="scan-assistant-send" onclick="sendScanAssistantMessage()">Send</button>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-config">
+
+
+ <h3>Content Discovery Configuration</h3>
+
+
+ <form class="config-form">
+
+
+ <div class="form-group">
+
+
+ <label for="recon-target-content" class="form-label">Target Subdomain or Prompt</label>
+
+
+ <input type="text" id="recon-target-content" class="form-control"
+
+
+ placeholder="e.g., example.google.com OR scan example.google.com for endpoints">
+
+
+ </div>
+
+
+
+
+
+ <div class="form-group">
+
+
+ <label class="form-label">Content Discovery Modules</label>
+
+
+ <!-- Content will be populated by JS -->
+
+
+ <div class="submodule-grid" id="content-tools-container"></div>
+
+
+ </div>
+
+
+
+
+
+ <div class="form-actions">
+
+
+ <button type="button" class="btn btn--primary start-scan">Start Content
+
+
+ Discovery</button>
+
+
+ <button type="button" class="btn btn--outline save-recipe-manual">Save as
+
+
+ Recipe</button>
+
+
+ <button type="button" class="btn btn--secondary clear-selection">Clear
+
+
+ selection</button>
+
+
+ </div>
+
+
+ </form>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-results hidden">
+
+
+ <h3>Discovery Results</h3>
+
+
+ <div class="results-grid">
+
+
+ <!-- Results will be generated here -->
+
+
+ </div>
+
+
+ </div>
+
+
+ </section>
+
+
+ </div>
+
+
+
+
+
+ <!-- VIEW: VULNERABILITY -->
+
+
+ <div id="view-vulnerability" class="view">
+
+
+ <section class="hero2">
+
+
+ <div class="page-header">
+
+
+ <h2>Vulnerabilities Scanning Module</h2>
+
+
+ <p>Advanced detection of web application vulnerabilities</p>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-split-layout">
+
+
+ <div class="scan-content-left">
+
+
+ <div class="scan-config-content">
+
+
+ <!-- Configuration content will be populated by JavaScript -->
+
+
+ </div>
+
+
+ </div>
+
+
+ <div class="scan-assistant-right">
+
+
+ <div class="scan-assistant-header">
+
+
+ <div class="scan-assistant-title">
+
+
+ <h3>AI Assistant</h3>
+
+
+ </div>
+
+
+ <button class="scan-assistant-close" onclick="closeScanAssistant()">x</button>
+
+
+ </div>
+
+
+ <div class="scan-assistant-messages">
+
+
+ <div class="scan-assistant-message bot">
+
+
+ <div class="scan-assistant-message-avatar">AI</div>
+
+
+ <div class="scan-assistant-message-content">
+
+
+ <p>Hello! I am here to help you with vulnerability scanning. I can explain
+
+
+ different types of vulnerabilities, help you understand scan results, and
+
+
+ guide you through remediation steps.</p>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ <div class="scan-assistant-quick-actions">
+
+
+ <button class="scan-assistant-quick-btn"
+
+
+ onclick="askScanAssistant('Tell me about SQL injection testing')">SQL
+
+
+ Injection</button>
+
+
+ <button class="scan-assistant-quick-btn"
+
+
+ onclick="askScanAssistant('How do I test for XSS vulnerabilities?')">XSS
+
+
+ Testing</button>
+
+
+ <button class="scan-assistant-quick-btn"
+
+
+ onclick="askScanAssistant('What is CSRF and how do I test for it?')">CSRF</button>
+
+
+ </div>
+
+
+ <div class="scan-assistant-input">
+
+
+ <input type="text" placeholder="Ask me about vulnerability scanning...">
+
+
+ <button class="scan-assistant-send" onclick="sendScanAssistantMessage()">Send</button>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-config">
+
+
+ <h3>Vulnerability Scan Configuration</h3>
+
+
+ <form class="config-form">
+
+
+ <div class="form-group">
+
+
+ <label for="vuln-target" class="form-label">Target Subdomain or Prompt</label>
+
+
+ <input type="text" id="vuln-target" class="form-control"
+
+
+ placeholder="e.g., example.google.com OR scan example.google.com for xss">
+
+
+ </div>
+
+
+
+
+
+ <div class="form-group">
+
+
+ <label class="form-label">Vulnerability Testing Modules</label>
+
+
+ <!-- Content will be populated by JS -->
+
+
+ <div class="submodule-grid" id="vuln-tools-container"></div>
+
+
+ </div>
+
+
+
+
+
+ <div class="form-actions">
+
+
+ <button type="button" class="btn btn--primary start-scan">Start Vulnerability
+
+
+ Scan</button>
+
+
+ <button type="button" class="btn btn--outline save-recipe-manual">Save as
+
+
+ Recipe</button>
+
+
+ <button type="button" class="btn btn--secondary clear-selection">Clear
+
+
+ selection</button>
+
+
+ </div>
+
+
+ </form>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-results hidden">
+
+
+ <h3>Vulnerability Scan Results</h3>
+
+
+ <div class="results-grid">
+
+
+ <!-- Results will be generated here -->
+
+
+ </div>
+
+
+ </div>
+
+
+ </section>
+
+
+ </div>
+
+
+
+
+
+ <!-- VIEW: AI ASSISTANT -->
+
+
+ <div id="view-ai-assistant" class="view">
+
+
+ <section class="hero2">
+
+
+ <div class="page-header">
+
+
+ <h2>VibeSecurity AI Chat</h2>
+
+
+ <p>Intelligent guidance and educational explanations for security testing</p>
+
+
+ </div>
+
+
+
+
+
+ <div class="chat-container">
+
+
+ <div class="chat-header">
+
+
+ <div class="chat-title">
+
+
+ <h2>AI Security Chat</h2>
+
+
+ </div>
+
+
+ <div class="chat-status">
+
+
+ <span class="status-indicator online"></span>
+
+
+ <span>Online</span>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <div class="ethical-notice">
+
+
+ <h4>Ethical Use Notice</h4>
+
+
+ <p>This AI assistant is designed to help with legitimate security testing only. Always
+
+
+ ensure proper authorization before testing any systems.</p>
+
+
+ </div>
+
+
+
+
+
+ <div class="chat-messages" id="chat-messages">
+
+
+ <div class="message bot">
+
+
+ <div class="message-avatar">AI</div>
+
+
+ <div class="message-content">
+
+
+ <p>Hello! I am your AI security chat. I can help you with vulnerability
+
+
+ explanations,
+
+
+ security testing guidance, and educational content about cybersecurity. What
+
+
+ would you like to learn about today?</p>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <div class="quick-actions">
+
+
+ <button class="quick-action-btn"
+
+
+ data-prompt="How should I prioritize vulnerabilities?">Prioritize
+
+
+ Vulnerabilities</button>
+
+
+ <button class="quick-action-btn" data-prompt="Explain SQL injection vulnerabilities">SQL
+
+
+ Injection</button>
+
+
+ <button class="quick-action-btn" data-prompt="What is XSS and how to prevent it?">XSS
+
+
+ Prevention</button>
+
+
+ <button class="quick-action-btn" data-prompt="How do CSRF attacks work?">CSRF
+
+
+ Attacks</button>
+
+
+ <button class="quick-action-btn" data-prompt="Best practices for secure coding">Secure
+
+
+ Coding</button>
+
+
+ </div>
+
+
+
+
+
+ <div class="chat-input-container">
+
+
+ <div class="chat-input" style="display: flex; gap: 10px; align-items: center; justify-content: space-between;">
+
+
+ <input type="text" id="chat-input" style="flex: 1;"
+
+
+ placeholder="Ask me about security testing, vulnerabilities, or best practices...">
+
+
+ 
+
+
+ <div class="mode-toggle-container" style="display: flex; align-items: center; border-radius: 8px; background: var(--color-background); padding: 4px; border: 1px solid var(--color-border); flex-shrink: 0;">
+
+
+ <button id="mode-mentor-btn" style="padding: 6px 12px; border: none; background: var(--color-primary); color: white; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.3s; white-space: nowrap;">Mentor Mode</button>
+
+
+ <button id="mode-hunter-btn" style="padding: 6px 12px; border: none; background: transparent; color: var(--color-text); border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.3s; white-space: nowrap;">Hunter Mode</button>
+
+
+ </div>
+
+
+ 
+
+
+ <button class="send-btn" id="send-btn" style="flex-shrink: 0;">Send</button>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ </section>
+
+
+ </div>
+
+
+
+
+
+ <!-- VIEW: HTTP REQUEST SCAN -->
+
+
+ <div id="view-http-request-scan" class="view">
+
+
+ <section class="hero2">
+
+
+ <div class="page-header">
+
+
+ <h2>HTTP Request Scanning</h2>
+
+
+ <p>Analyze and test individual HTTP request/response pairs for complex logic flaws</p>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-config">
+
+
+ <h3>Deep HTTP Analysis</h3>
+
+
+ <p>Paste your raw HTTP request and its corresponding response below. The AI Hacker will analyze
+
+
+ the transaction for hidden business logic flaws, IDOR, parameter tampering, and
+
+
+ authorization bypasses.</p>
+
+
+
+
+
+ <form class="config-form" id="traffic-analysis-form">
+
+
+ <div class="form-group">
+
+
+ <label for="http-request-input" class="form-label">Raw HTTP Request</label>
+
+
+ <textarea id="http-request-input" class="form-control" rows="8" placeholder="POST /api/user/update HTTP/1.1
+
+
+Host: example.com
+
+
+Content-Type: application/json
+
+
+Cookie: session=abc123
+
+
+
+
+
+{&#34;user_id&#34;: 5, &#34;role&#34;: &#34;admin&#34;}"></textarea>
+
+
+ </div>
+
+
+ <div class="form-group" style="margin-top: 15px;">
+
+
+ <label for="http-response-input" class="form-label">Raw HTTP Response</label>
+
+
+ <textarea id="http-response-input" class="form-control" rows="8" placeholder="HTTP/1.1 200 OK
+
+
+Content-Type: application/json
+
+
+
+
+
+{&#34;status&#34;: &#34;success&#34;, &#34;message&#34;: &#34;User role updated&#34;}"></textarea>
+
+
+ </div>
+
+
+ <div class="form-actions">
+
+
+ <button type="button" class="btn btn--primary" id="analyze-traffic-btn">Analyze
+
+
+ Traffic</button>
+
+
+ <button type="button" class="btn btn--secondary"
+
+
+ onclick="document.getElementById('traffic-analysis-form').reset()">Clear</button>
+
+
+ </div>
+
+
+ </form>
+
+
+ </div>
+
+
+
+
+
+ <div class="scan-results hidden">
+
+
+ <h3>Analysis Results</h3>
+
+
+ <div class="results-grid"></div>
+
+
+ </div>
+
+
+ </section>
+
+
+ </div>
+
+
+
+
+
+ <!-- VIEW: HUNTER AGENT -->
+
+
+ <div id="view-hunter-agent" class="view">
+
+
+ <section class="hero2">
+
+
+ <div class="page-header">
+
+
+ <h2>Hunter Agent</h2>
+
+
+ <p>Autonomous multi-agent crawl analysis across five specialized vulnerability domains</p>
+
+
+ </div>
+
+
+
+
+
+ <!-- Hunter Agent overview -->
+
+
+ <div class="hunter-agent-banner"
+
+
+ style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(139, 92, 246, 0.08)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 30px; margin-bottom: 24px; text-align: center;">
+
+
+ <div style="font-size: 2.5rem; margin-bottom: 12px;"></div>
+
+
+ <h3 style="margin: 0 0 8px 0; color: #8b5cf6; font-size: 1.4rem;">Autonomous Hunter Agent</h3>
+
+
+ <p style="color: var(--color-text-muted); margin: 0; max-width: 600px; margin: 0 auto;">AI
+
+
+ Hunter Agent uses a router + sub-agent architecture with 5 specialized vulnerability domain
+
+
+ agents for autonomous, full-crawl security analysis.</p>
+
+
+ </div>
+
+
+
+
+
+ <!-- Hunter Agent capabilities description -->
+
+
+ <div class="scan-config" style="margin-bottom: 24px;">
+
+
+ <h3>What Hunter Agent Does</h3>
+
+
+ <div
+
+
+ style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 16px;">
+
+
+ <div
+
+
+ style="background: var(--color-background); padding: 16px; border-radius: 8px; border: 1px solid var(--color-border);">
+
+
+ <h4 style="margin: 0 0 8px 0; color: #00d4ff;">Access Control Agent</h4>
+
+
+ <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-muted);">IDOR
+
+
+ detection, privilege boundary analysis, numeric ID pattern detection</p>
+
+
+ </div>
+
+
+ <div
+
+
+ style="background: var(--color-background); padding: 16px; border-radius: 8px; border: 1px solid var(--color-border);">
+
+
+ <h4 style="margin: 0 0 8px 0; color: #f59e0b;">Business Logic Agent</h4>
+
+
+ <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-muted);">Multi-step
+
+
+ workflow abuse, state machine violations, race conditions</p>
+
+
+ <small style="color: #555;">Model: nvidia/nemotron-3-super-120b-a12b:free</small>
+
+
+ </div>
+
+
+ <div
+
+
+ style="background: var(--color-background); padding: 16px; border-radius: 8px; border: 1px solid var(--color-border);">
+
+
+ <h4 style="margin: 0 0 8px 0; color: #ef4444;">Injection Agent</h4>
+
+
+ <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-muted);">SQLi, SSTI,
+
+
+ Command Injection, XXE syntax and code-path analysis</p>
+
+
+ <small style="color: #555;">Model: qwen/qwen3-coder:free</small>
+
+
+ </div>
+
+
+ <div
+
+
+ style="background: var(--color-background); padding: 16px; border-radius: 8px; border: 1px solid var(--color-border);">
+
+
+ <h4 style="margin: 0 0 8px 0; color: #10b981;">SSRF Agent</h4>
+
+
+ <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-muted);">Out-of-band
+
+
+ detection, SSRF patterns across many endpoints</p>
+
+
+ <small style="color: #555;">Model: stepfun/step-3.5-flash:free</small>
+
+
+ </div>
+
+
+ <div
+
+
+ style="background: var(--color-background); padding: 16px; border-radius: 8px; border: 1px solid var(--color-border);">
+
+
+ <h4 style="margin: 0 0 8px 0; color: #8b5cf6;">Auth Bypass Agent</h4>
+
+
+ <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-muted);">Known bypass
+
+
+ techniques, authentication mechanism weakness patterns</p>
+
+
+ <small style="color: #555;">Model: openai/gpt-oss-20b:free</small>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- Disabled Input Fields -->
+
+
+ <div class="scan-config">
+
+
+ <h3>Hunter Agent Scan Configuration</h3>
+
+
+ <form class="config-form">
+
+
+ <div class="form-group">
+
+
+ <label class="form-label">Target URL</label>
+
+
+ <input type="text" class="form-control" placeholder="https://target.com" disabled
+
+
+ title="Use Hunter Mode in AI chat for live scans" style="opacity: 0.5; cursor: not-allowed;">
+
+
+ </div>
+
+
+ <div class="form-group" style="margin-top: 15px;">
+
+
+ <label class="form-label">Crawler JSON Upload (_crawler.json)</label>
+
+
+ <input type="file" class="form-control" accept=".json" disabled
+
+
+ title="Use Hunter Mode in AI chat for live scans" style="opacity: 0.5; cursor: not-allowed;">
+
+
+ </div>
+
+
+ <div class="form-actions">
+
+
+ <button type="button" class="btn btn--primary" disabled
+
+
+ style="opacity: 0.5; cursor: not-allowed;" id="hunter-start-scan-btn"
+
+
+ title="Use Hunter Mode in AI chat for live scans">Start Hunter Agent Scan</button>
+
+
+ </div>
+
+
+ </form>
+
+
+ </div>
+
+
+
+
+
+ <!-- Hunter Agent Quota Widget -->
+
+
+ <div class="scan-config" style="margin-top: 24px;">
+
+
+ <h3>API Quota Status</h3>
+
+
+ <p style="color: var(--color-text-muted);">Each Hunter Agent scan uses ~6 API calls (1 router + 5 agents).
+
+
+ Free tier: 200 req/day.</p>
+
+
+ <div id="hunter-quota-display" style="margin-top: 12px;">
+
+
+ <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+
+
+ <span>Requests Used</span>
+
+
+ <span id="hunter-quota-used">--</span>
+
+
+ </div>
+
+
+ <div
+
+
+ style="background: var(--color-background); border-radius: 8px; height: 12px; overflow: hidden;">
+
+
+ <div id="hunter-quota-bar"
+
+
+ style="background: linear-gradient(90deg, #00d4ff, #8b5cf6); height: 100%; width: 0%; border-radius: 8px; transition: width 0.5s ease;">
+
+
+ </div>
+
+
+ </div>
+
+
+ <div
+
+
+ style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.8rem; color: var(--color-text-muted);">
+
+
+ <span>Remaining: <span id="hunter-quota-remaining">--</span></span>
+
+
+ <span>Resets: <span id="hunter-quota-reset">--</span></span>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- Hunter Agent results placeholder -->
+
+
+ <div class="scan-results hidden" id="hunter-results">
+
+
+ <h3>Hunter Agent Analysis Results</h3>
+
+
+ <div class="results-grid"></div>
+
+
+ </div>
+
+
+ </section>
+
+
+ </div>
+
+
+
+
+
+ <!-- VIEW: REPORTING (Updated with Artifacts Sidebar) -->
+
+
+ <div id="view-reporting" class="view">
+
+
+ <section class="hero2">
+
+
+ <div class="page-header">
+
+
+ <h2>Session Report</h2>
+
+
+ <p>Real-time analysis of current session findings</p>
+
+
+ </div>
+
+
+
+
+
+ <!-- Empty State Container -->
+
+
+ <div id="report-empty-state" class="report-empty-state">
+
+
+ <h3>Generate a Consolidated Report</h3>
+
+
+ <p>Enter the target domain to consolidate all scan findings into a single report.</p>
+
+
+ <div style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 15px;">
+
+
+ <input type="text" id="report-target-input" class="form-control"
+
+
+ placeholder="e.g., vulnweb.com" style="max-width: 300px;">
+
+
+ <button class="btn btn--primary" id="generate-report-btn">Generate Report</button>
+
+
+ </div>
+
+
+ <p style="margin-top: 12px; font-size: 0.85rem; color: var(--color-text-muted);">
+
+
+ Or <a href="#" style="color: var(--color-primary);"
+
+
+ onclick="event.preventDefault(); document.querySelector('[data-target=\'dashboard\']').click()">start a new scan</a> first.
+
+
+ </p>
+
+
+ </div>
+
+
+
+
+
+ <!-- Reporting Layout: Artifacts Sidebar + Report Content -->
+
+
+ <div id="reporting-layout" class="reporting-layout hidden">
+
+
+
+
+
+ <!-- Artifacts Sidebar -->
+
+
+ <aside class="artifacts-sidebar" id="artifacts-sidebar">
+
+
+ <div class="artifacts-sidebar-header">
+
+
+ <h3>Session Artifacts</h3>
+
+
+ <span class="artifacts-count" id="artifacts-count">0 files</span>
+
+
+ </div>
+
+
+
+
+
+ <!-- Report Files (Clickable) -->
+
+
+ <div class="artifacts-section">
+
+
+ <h4>Reports</h4>
+
+
+ <div class="artifacts-list" id="artifacts-reports-list">
+
+
+ <!-- Populated by JS -->
+
+
+ <div class="artifact-placeholder">No reports available</div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- Data Files (Download Only) -->
+
+
+ <div class="artifacts-section">
+
+
+ <h4>Data Files</h4>
+
+
+ <div class="artifacts-list" id="artifacts-data-list">
+
+
+ <!-- Populated by JS -->
+
+
+ <div class="artifact-placeholder">No data files</div>
+
+
+ </div>
+
+
+ </div>
+
+
+ </aside>
+
+
+
+
+
+ <!-- Main Report Content (Paper Theme) -->
+
+
+ <div id="report-content" class="report-paper-theme">
+
+
+
+
+
+ <!-- Header with Export Actions -->
+
+
+ <div class="report-top-bar">
+
+
+ <div class="report-meta">
+
+
+ <h3>Executive Summary</h3>
+
+
+ <span class="report-date">Generated: Session Active</span>
+
+
+ <span class="report-source-badge" id="report-source-badge" style="display:none; margin-left: 12px; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;"></span>
+
+
+ </div>
+
+
+ <div class="report-actions">
+
+
+ <button class="btn btn--outline btn--sm" id="export-html-btn" onclick="exportReportAsHTML()">Export as HTML</button>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- Top Row: Charts & Score -->
+
+
+ <div class="report-dashboard-row">
+
+
+ <!-- Risk Score Card -->
+
+
+ <div class="score-card">
+
+
+ <h4>Risk Score</h4>
+
+
+ <div class="big-score" id="risk-score-display">0.0</div>
+
+
+ <span class="score-label">CVSS Average</span>
+
+
+ </div>
+
+
+
+
+
+ <!-- Charts -->
+
+
+ <div class="chart-card">
+
+
+ <h4>Severity Breakdown</h4>
+
+
+ <div class="canvas-container">
+
+
+ <canvas id="chart-severity"></canvas>
+
+
+ </div>
+
+
+ </div>
+
+
+ <div class="chart-card">
+
+
+ <h4>Vulnerability Categories</h4>
+
+
+ <div class="canvas-container">
+
+
+ <canvas id="chart-categories"></canvas>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- AI Executive Summary Text -->
+
+
+ <div class="report-section-text">
+
+
+ <h4>AI Assessment</h4>
+
+
+ <p id="ai-summary-text">Waiting for scan data to generate executive summary...</p>
+
+
+ </div>
+
+
+
+
+
+ <!-- Interactive Split View -->
+
+
+ <div class="report-split-container">
+
+
+
+
+
+ <!-- Left: List -->
+
+
+ <div class="vuln-list-sidebar">
+
+
+ <div class="list-header">
+
+
+ <h4>Findings List</h4>
+
+
+ <input type="text" placeholder="Filter..." class="paper-input">
+
+
+ </div>
+
+
+ <div class="vuln-items-container" id="vuln-list-items">
+
+
+ <!-- Items injected via JS -->
+
+
+ <div class="vuln-item-placeholder">No findings selected</div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ <!-- Right: Details -->
+
+
+ <div class="vuln-details-panel">
+
+
+ <div id="vuln-details-content">
+
+
+ <div class="details-empty-select">
+
+
+ <p>Select a vulnerability from the left to view technical details, CVSS scoring,
+
+
+ and remediation advice.</p>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ </div>
+
+
+ </div>
+
+
+
+
+
+ </section>
+
+
+ </div>
+
+
+
+
+
+ </div>
+
+
+ </main>
+
+
+
+
+
+ <div class="particles"></div>
+
+
+
+
+
+ <!-- RECIPE MANAGER MODAL -->
+
+
+ <div id="recipe-manager-modal" class="modal-overlay"
+
+
+ style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
+
+
+ <div class="modal-content"
+
+
+ style="max-width: 600px; width: 90%; background: var(--color-background-card); border: 1px solid var(--color-border); border-radius: 8px; padding: 20px;">
+
+
+ <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+
+
+ <h3 style="margin:0;">Manage Saved Recipes</h3>
+
+
+ <button id="close-recipe-modal"
+
+
+ style="background:none; border:none; color: var(--color-text); cursor:pointer; font-size: 1.5rem;">&times;</button>
+
+
+ </div>
+
+
+ <div id="recipe-list-container"
+
+
+ style="max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+
+
+ <!-- Recipes listed here dynamically -->
+
+
+ </div>
+
+
+ </div>
+
+
+ </div>
+
+
+ <!-- ORDER MATTERS: Config ->Logic ->UI -->
+
+
+ <script src="../static/js/core.js"></script>
+
+
+ <script src="../static/js/features-config.js"></script>
+
+
+ <script src="../static/js/features-ui.js"></script>
+
+
+ <script src="../static/js/features-scan.js"></script>
+
+
+ <script src="../static/js/features-recipes.js"></script>
+
+
+ <script src="../static/js/features-chat.js"></script>
+
+
+ <script src="../static/js/features-flow.js"></script>
+
+
+ <script src="../static/js/features-reporting.js"></script>
+
+
+ <script src="../static/js/app.js"></script>
+
+
+</body>
+
+
+
+
+
+</html>
+
+
+
+
+

@@ -1,0 +1,3 @@
+zero.webappsecurity.com
+demo.testfire.net
+demo.owasp-juice.shop

@@ -1,0 +1,3 @@
+{"username":"test_rate_limit@example.com","password":"DummyPassword123!"}
+username=test_rate_limit_2@example.com&password=DummyPassword123!
+{"email":"test_rate_limit@example.com","password":"DummyPassword123!"}

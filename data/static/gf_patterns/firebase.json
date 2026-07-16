@@ -1,0 +1,7 @@
+{
+    "flags": "-iE",
+    "patterns": [
+        "[a-z0-9.-]+\\.firebaseio\\.com",
+        "[a-z0-9.-]+\\.firebaseapp\\.com"
+    ]
+}

@@ -1,0 +1,11 @@
+REMOVE_AUTH
+Authorization: Bearer invalid_token_123
+Cookie: session=invalid_session_123
+METHOD: HEAD
+METHOD: OPTIONS
+METHOD: PUT
+METHOD: DELETE
+METHOD: HACK
+HEADER: X-Original-URL={path}
+HEADER: X-Rewrite-URL={path}
+IDOR_INCREMENT

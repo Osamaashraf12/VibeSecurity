@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Environments
+.env
+.env.*
+!.env.example
+.vscode/
+
+# Runtime outputs
+var/
+backend/data/
+
+# Local databases
+*.db
+*.db-wal
+*.db-shm

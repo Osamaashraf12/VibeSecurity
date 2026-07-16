@@ -1,0 +1,4 @@
+{
+    "flags": "-iE",
+    "pattern": "((\\?|&)(upload|file|avatar|image|photo|doc|document|attachment|logo|banner|import|export|backup)=)|(/(upload|file|avatar|image|attachment)/)"
+}

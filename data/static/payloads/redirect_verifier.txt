@@ -1,0 +1,5 @@
+https://example.com
+//example.com
+\/\/example.com
+https:example.com
+/%2f%2fexample.com

@@ -1,0 +1,6 @@
+vibe_polluted
+0
+cross_scope_vibe
+type_confusion
+true
+null

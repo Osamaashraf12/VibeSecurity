@@ -1,0 +1,4 @@
+{
+    "flags": "-iE",
+    "pattern": "(/(api|v[0-9]|graphql|rest|json|xml|swagger|openapi|actuator|webhook|oauth|callback|token|auth|shell|exec|cmd|export|dump|import|restore)/)|((\\?|&)(token|key|api_key|secret|auth|access|client_id|callback|jsonp)=)"
+}

@@ -1,0 +1,11 @@
+# --- Analysis Tools ---
+# 'uro' is used in link_analyzer.py for advanced URL deduplication/cleaning.
+# It provides the 'uro' CLI command called via subprocess.
+uro>=1.0.0
+
+# 'jsbeautifier' is used in js_analyzer.py to deobfuscate/format JavaScript files.
+# It provides the 'js-beautify' CLI command called via subprocess.
+jsbeautifier>=1.14.0
+
+httpx>=0.27.0
+pyjwt>=2.8.0

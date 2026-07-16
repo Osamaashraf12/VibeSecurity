@@ -1,0 +1,36 @@
+# Requirements to run recon.py
+# Note: You will run this in a Kali Linux terminal (bash), so these are system-level tool requirements rather than pip packages.
+
+# 1. subfinder
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+
+# 2. dnsx
+go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
+
+# 3. httpx
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+
+# 4. katana
+go install github.com/projectdiscovery/katana/cmd/katana@latest
+
+# 5. jsluice
+go install github.com/BishopFox/jsluice/cmd/jsluice@latest
+
+# 6. trufflehog
+curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
+
+# 7. uro
+pip3 install uro
+
+# 8. urinteresting
+go install github.com/m4ll0k/urinteresting@latest
+
+# 9. gf & gf-patterns
+go install github.com/tomnomnom/gf@latest
+# Note: make sure the binaries downloaded by go are in your $PATH. (Usually ~/go/bin or /usr/local/go/bin)
+
+# Install VibeSecurity gf patterns (local patterns):
+# The patterns are located in data/gf_patterns/
+# To install them on your Kali system, run:
+chmod +x setup_gf.sh
+./setup_gf.sh

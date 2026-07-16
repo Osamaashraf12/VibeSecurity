@@ -1,0 +1,4 @@
+<script>alert('VIBESEC-XSS')</script>
+"><img src=x onerror=alert('VIBESEC-XSS')>
+'-alert('VIBESEC-XSS')-'
+<svg/onload=alert('VIBESEC-XSS')>

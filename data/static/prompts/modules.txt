@@ -1,0 +1,17 @@
+Asset Discovery
+root_hunter: Discovers related root domains.
+sub_enumer: Passive subdomain enumeration (Subfinder).
+sub_bforcer: Active DNS brute-forcing (Wordlists).
+sub_permuter: Generates subdomain mutations (Alterx).
+sub_checker: Validates active subdomains (DNSx).
+
+Content Discovery
+tech_detector: Fingerprints technology stacks (Wappalyzer).
+sub_crawler: Deep spidering to map endpoints (Katana).
+js_analyzer: Static analysis of JavaScript files for secrets.
+link_analyzer: Pattern matching for vulnerable parameters (GF).
+git_hunter: Scans for exposed repository leaks.
+param_reflector: Probes parameters for reflection.
+
+Exploitation
+vuln_scan: Targeted vulnerability scanning (Nuclei).

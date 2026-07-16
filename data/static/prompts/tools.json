@@ -1,0 +1,138 @@
+{
+  "tools": [
+    {
+      "name": "root_hunter",
+      "description": "Identifies related root domains for a target organization.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The primary domain name (e.g., example.com)" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "sub_enumer",
+      "description": "Performs passive subdomain enumeration using public sources.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The domain to enumerate" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "sub_bforcer",
+      "description": "Performs active subdomain brute-forcing using wordlists.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The domain to brute-force" },
+          "wordlist": { "type": "string", "description": "Optional path to custom wordlist" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "sub_permuter",
+      "description": "Generates and resolves subdomain mutations (e.g., dev-api from api).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The base domain or file of subdomains" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "sub_checker",
+      "description": "Validates which subdomains are active (DNS Resolution).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The domain to check" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "tech_detector",
+      "description": "Fingerprints technology stacks (Wappalyzer) on live endpoints.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The domain or URL to fingerprint" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "sub_crawler",
+      "description": "Crawls the web application to discover endpoints and assets.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The domain to crawl" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "js_analyzer",
+      "description": "Downloads and analyzes JavaScript files for secrets.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The domain to analyze" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "link_analyzer",
+      "description": "Filters and patterns matches parameters for vulnerabilities.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The domain to analyze" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "git_hunter",
+      "description": "Scans for exposed .git directories and sensitive source code leaks.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The target domain" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "param_reflector",
+      "description": " actively probes parameters for reflection (XSS/SSTI potential).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The target domain or URL" }
+        },
+        "required": ["target"]
+      }
+    },
+    {
+      "name": "vuln_scan",
+      "description": "Runs targeted vulnerability scans (Nuclei).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": { "type": "string", "description": "The target to scan" },
+          "intensity": { "type": "string", "enum": ["low", "medium", "high"] }
+        },
+        "required": ["target"]
+      }
+    }
+  ]
+}

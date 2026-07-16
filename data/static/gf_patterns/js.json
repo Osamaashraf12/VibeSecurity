@@ -1,0 +1,4 @@
+{
+  "flags": "-iE",
+  "pattern": "\\.(js|jsp|jsx|ts|tsx|vue)($|\\?|/)"
+}

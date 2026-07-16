@@ -1,0 +1,4 @@
+{
+    "flags": "-iE",
+    "pattern": "\\.(conf|config|bak|old|db|sql|json|xml|git|env|yml|yaml|swp|log|rar|zip|7z|tar|gz|bz2|txt|asc|pgp|key|pem|crt|cer|p12|pfx|jsp|asp|aspx|php|php5|htaccess|git/config|svn|DS_Store|tmp|properties|toml|ini|cfg|web\\.config|htpasswd|war|rb|py|go|java)$"
+}

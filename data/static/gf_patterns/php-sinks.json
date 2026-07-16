@@ -1,0 +1,24 @@
+{
+    "flags": "-iE",
+    "patterns": [
+        "eval\\(",
+        "exec\\(",
+        "passthru\\(",
+        "system\\(",
+        "shell_exec\\(",
+        "popen\\(",
+        "proc_open\\(",
+        "pcntl_exec\\(",
+        "assert\\(",
+        "preg_replace\\(.*\\/e.*\\)",
+        "create_function\\(",
+        "include\\(",
+        "include_once\\(",
+        "require\\(",
+        "require_once\\(",
+        "file_get_contents\\(",
+        "file_put_contents\\(",
+        "fopen\\(",
+        "readfile\\("
+    ]
+}
