@@ -47,7 +47,7 @@ The backend is an async FastAPI application. Each feature domain is a separate `
 
 The core feature. A LangGraph state graph that models the penetration testing workflow as a typed DAG. The graph holds a single `AgentState` object that accumulates findings across all nodes.
 
-See `docs/diagrams/hunter_pipeline.svg` for the full node graph.
+See `docs/diagrams/hunter_pipeline.png` for the full node graph.
 
 **Node responsibilities:**
 

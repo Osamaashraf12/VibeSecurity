@@ -655,9 +655,9 @@ VibeSecurity/
 ├── docs/                              # Technical documentation & architecture diagrams
 │   ├── system_design.md               # System design documentation
 │   └── diagrams/                      # Architecture & sequence diagrams
-│       ├── system_architecture.svg    # System architecture diagram
-│       ├── hunter_pipeline.svg        # Hunter pipeline graph diagram
-│       └── data_flow.svg              # End-to-end data flow diagram
+│       ├── system_architecture.png    # System architecture diagram
+│       ├── hunter_pipeline.png        # Hunter pipeline graph diagram
+│       └── data_flow.png              # End-to-end data flow diagram
 ├── Dockerfile                         # Kali Linux image with all tools
 ├── docker-compose.yaml
 ├── requirements.txt                   # Core Python dependencies
@@ -675,9 +675,9 @@ The `docs/` directory contains technical documentation and architecture diagrams
 | File | Description |
 |---|---|
 | [`docs/system_design.md`](docs/system_design.md) | Problem statement, design goals, component breakdown, key architectural decisions, and known limitations |
-| [`docs/diagrams/system_architecture.svg`](docs/diagrams/system_architecture.svg) | Structural diagram: Docker container, internal components, and external dependencies |
-| [`docs/diagrams/hunter_pipeline.svg`](docs/diagrams/hunter_pipeline.svg) | Full LangGraph node graph for the Hunter Agent pipeline |
-| [`docs/diagrams/data_flow.svg`](docs/diagrams/data_flow.svg) | End-to-end data flow from user input to client response |
+| [`docs/diagrams/system_architecture.png`](docs/diagrams/system_architecture.png) | Structural diagram: Docker container, internal components, and external dependencies |
+| [`docs/diagrams/hunter_pipeline.png`](docs/diagrams/hunter_pipeline.png) | Full LangGraph node graph for the Hunter Agent pipeline |
+| [`docs/diagrams/data_flow.png`](docs/diagrams/data_flow.png) | End-to-end data flow from user input to client response |
 
 ---
 
